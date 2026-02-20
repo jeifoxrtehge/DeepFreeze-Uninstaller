@@ -1,0 +1,76 @@
+name: Release
+
+on:
+  push:
+    tags:
+      - 'v*'
+
+jobs:
+  build:
+    runs-on: windows-latest
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v3
+    
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.11'
+    
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install pyinstaller
+    
+    - name: Build executables
+      run: |
+        pyinstaller --onefile --windowed --name "DeepFreeze_Uninstaller_GUI" "强力uninstall 冰点还原_GUI.py"
+        pyinstaller --onefile --name "DeepFreeze_Uninstaller_CLI" "强力uninstall 冰点还原.py"
+        pyinstaller --onefile --name "DeepFreeze_Uninstaller_Pro" "强力uninstall 冰点还原_专业版.py"
+    
+    - name: Create Release Package
+      run: |
+        mkdir "DeepFreeze-Uninstaller"
+        copy "README.md" "DeepFreeze-Uninstaller\"
+        copy "LICENSE" "DeepFreeze-Uninstaller\"
+        copy "启动器.bat" "DeepFreeze-Uninstaller\"
+        copy "一键斩杀冰点还原.bat" "DeepFreeze-Uninstaller\"
+        copy "dist\DeepFreeze_Uninstaller_GUI.exe" "DeepFreeze-Uninstaller\"
+        copy "dist\DeepFreeze_Uninstaller_CLI.exe" "DeepFreeze-Uninstaller\"
+        copy "dist\DeepFreeze_Uninstaller_Pro.exe" "DeepFreeze-Uninstaller\"
+        copy "强力uninstall 冰点还原.py" "DeepFreeze-Uninstaller\"
+        copy "强力uninstall 冰点还原_GUI.py" "DeepFreeze-Uninstaller\"
+        copy "强力uninstall 冰点还原_专业版.py" "DeepFreeze-Uninstaller\"
+        7z a -tzip "DeepFreeze-Uninstaller-${{ github.ref_name }}.zip" "DeepFreeze-Uninstaller\"
+    
+    - name: Create Release
+      uses: softprops/action-gh-release@v1
+      with:
+        files: |
+          DeepFreeze-Uninstaller-${{ github.ref_name }}.zip
+        body: |
+          ## DeepFreeze Uninstaller ${{ github.ref_name }}
+          
+          ### 包含文件
+          - DeepFreeze_Uninstaller_GUI.exe - 图形界面版
+          - DeepFreeze_Uninstaller_CLI.exe - 命令行版
+          - DeepFreeze_Uninstaller_Pro.exe - 专业版（推荐）
+          - 启动器.bat - 启动菜单
+          - Python 源代码
+          
+          ### 使用方法
+          1. 下载并解压
+          2. 进入 PE 系统
+          3. 运行 启动器.bat 或直接运行 exe
+          4. 按提示操作
+          
+          ### 注意事项
+          - **必须在 PE 系统下运行**
+          - 操作前会自动备份 SYSTEM 文件
+          - 推荐优先使用专业版
+          
+          ### 恢复方法
+          如果系统蓝屏，将备份的 SYSTEM.bak 复制到 Windows\System32\config\SYSTEM
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
