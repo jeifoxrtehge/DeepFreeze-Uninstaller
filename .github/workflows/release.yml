@@ -34,14 +34,10 @@ jobs:
         mkdir "DeepFreeze-Uninstaller"
         copy "README.md" "DeepFreeze-Uninstaller\"
         copy "LICENSE" "DeepFreeze-Uninstaller\"
-        copy "启动器.bat" "DeepFreeze-Uninstaller\"
-        copy "一键斩杀冰点还原.bat" "DeepFreeze-Uninstaller\"
+        copy "launcher.bat" "DeepFreeze-Uninstaller\"
         copy "dist\DeepFreeze_Uninstaller_GUI.exe" "DeepFreeze-Uninstaller\"
         copy "dist\DeepFreeze_Uninstaller_CLI.exe" "DeepFreeze-Uninstaller\"
         copy "dist\DeepFreeze_Uninstaller_Pro.exe" "DeepFreeze-Uninstaller\"
-        copy "强力uninstall 冰点还原.py" "DeepFreeze-Uninstaller\"
-        copy "强力uninstall 冰点还原_GUI.py" "DeepFreeze-Uninstaller\"
-        copy "强力uninstall 冰点还原_专业版.py" "DeepFreeze-Uninstaller\"
         7z a -tzip "DeepFreeze-Uninstaller-${{ github.ref_name }}.zip" "DeepFreeze-Uninstaller\"
     
     - name: Create Release
@@ -56,13 +52,12 @@ jobs:
           - DeepFreeze_Uninstaller_GUI.exe - 图形界面版
           - DeepFreeze_Uninstaller_CLI.exe - 命令行版
           - DeepFreeze_Uninstaller_Pro.exe - 专业版（推荐）
-          - 启动器.bat - 启动菜单
-          - Python 源代码
+          - launcher.bat - 启动菜单
           
           ### 使用方法
           1. 下载并解压
           2. 进入 PE 系统
-          3. 运行 启动器.bat 或直接运行 exe
+          3. 运行 launcher.bat 或直接运行 exe
           4. 按提示操作
           
           ### 注意事项
