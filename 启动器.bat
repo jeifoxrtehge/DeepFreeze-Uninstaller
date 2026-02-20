@@ -23,10 +23,7 @@ echo  [3] 强力卸载冰点还原 - 专业版
 echo      推荐！整合SYSTEM-RAMOS-ZDY技术
 echo      修复驱动过滤器，处理更彻底
 echo.
-echo  [4] 一键斩杀冰点还原 - 原版BAT
-echo      SYSTEM-RAMOS-ZDY的原版工具
-echo.
-echo  [5] 查看使用说明
+echo  [4] 查看使用说明
 echo.
 echo  [0] 退出
 echo.
@@ -38,8 +35,7 @@ set /p choice=请输入选项 (0-5):
 if "%choice%"=="1" goto cmd_version
 if "%choice%"=="2" goto gui_version
 if "%choice%"=="3" goto pro_version
-if "%choice%"=="4" goto bat_version
-if "%choice%"=="5" goto help
+if "%choice%"=="4" goto help
 if "%choice%"=="0" goto exit
 goto invalid
 
@@ -65,13 +61,6 @@ echo 正在启动专业版...
 echo.
 python "强力uninstall 冰点还原_专业版.py"
 pause
-goto start
-
-:bat_version
-echo.
-echo 正在启动原版BAT工具...
-echo.
-call "一键斩杀冰点还原.bat"
 goto start
 
 :help
