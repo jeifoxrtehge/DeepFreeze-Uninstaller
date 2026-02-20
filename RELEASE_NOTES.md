@@ -28,12 +28,11 @@
 DeepFreeze-Uninstaller-v1.0.0/
 ├── DeepFreeze_Uninstaller_CLI.exe      # 命令行版
 ├── DeepFreeze_Uninstaller_GUI.exe      # 图形界面版
-├── DeepFreeze_Uninstaller_Pro.exe      # 专业版
+├── DeepFreeze_Uninstaller_Pro.exe      # 专业版 ⭐
 ├── 启动器.bat                           # 启动菜单
 ├── 强力uninstall 冰点还原.py            # 源代码
 ├── 强力uninstall 冰点还原_GUI.py        # 源代码
 ├── 强力uninstall 冰点还原_专业版.py      # 源代码
-├── 一键斩杀冰点还原.bat                  # 原版BAT
 ├── README.md                            # 说明文档
 └── LICENSE                              # 许可证
 ```
